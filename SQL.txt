@@ -1,3 +1,6 @@
+CREATE DATABASE `test` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+
 create table adress(
     Index_name varchar(50),
     City varchar(50) not null,
