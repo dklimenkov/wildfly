@@ -1,0 +1,35 @@
+create table adress(
+    Index_name varchar(50),
+    City varchar(50) not null,
+    Street varchar(50) not null,
+    House varchar(50) not null,
+    Flat int(10),
+    id int(10) not null UNIQUE,
+    primary key(id));
+
+create table filials(
+    Name_Filial varchar(50) not null,
+    Adress int(10) not null,
+    id int(10) not null,
+    primary key(id),
+    id_for int(10) not null,
+    FOREIGN KEY (Adress)  REFERENCES test.adress (id));
+
+CREATE INDEX filials_id_IDX USING BTREE ON test.filials (id_for);
+
+create table building(
+    Name_Company varchar(100) not null,
+    Form varchar(5),
+    Adress_Company int(10) not null,
+    Filial_Company int(10),
+    id int(10) not null UNIQUE,
+    primary key(id),
+    FOREIGN KEY (Adress_Company)  REFERENCES adress (id),
+    FOREIGN KEY (Filial_Company)  REFERENCES filials (id_for));
+
+
+
+
+
+
+
