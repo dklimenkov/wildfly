@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: User
+Build-Jdk: 19.0.2
+Created-By: Maven Integration for Eclipse
+Implementation-Title: DB
+Implementation-URL: http://validator.hibernate.org
+Implementation-Vendor: org.hibernate
+Implementation-Vendor-Id: org.hibernate
+Implementation-Version: 0.0.1-SNAPSHOT
+
