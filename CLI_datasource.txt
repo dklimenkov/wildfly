@@ -1,0 +1,5 @@
+module add --name=com.mysql --dependencies=javax.api,javax.transaction.api --resources=E:\wildfly-24.0.1.Final\modules\com\mysql\driver8\main\mysql-connector-j-8.0.33.jar
+
+/profile=full-ha/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql.driver8,driver-class-name=com.mysql.jdbc.Driver)
+
+data-source add --jndi-name=java:jboss/datasources/MySqlDS --name=MySQLPool --connection-url=jdbc:mysql://localhost:3306/test --driver-name=mysql --user-name=root --password=1234 --profile=full-ha
