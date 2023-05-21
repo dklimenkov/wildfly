@@ -31,31 +31,6 @@ create table building(
     FOREIGN KEY (Filial_Company)  REFERENCES filials (id_for));
 
 
-INSERT INTO test.fil
-(Name_Filial, Index_name, City, Street, House, Flat)
-VALUES('Filial', '123111', 'Moscow', 'Ленинская', '10', 1);
-INSERT INTO test.fil
-(Name_Filial, Index_name, City, Street, House, Flat)
-VALUES('Filial2', '123211', 'Moscow', 'Сенная', '2', 15);
-INSERT INTO test.fil
-(Name_Filial, Index_name, City, Street, House, Flat)
-VALUES('Filial3', '123311', 'Moscow', 'Финская', '37к4', 12);
-
-
-INSERT INTO test.buil
-(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
-VALUES('Name1', 'ООО', '123211', 'Moscow', 'Сенная', '2', 15, NULL);
-INSERT INTO test.buil
-(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
-VALUES('Name2', 'ИП', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial');
-INSERT INTO test.buil
-(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
-VALUES('Name3', 'АО', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial2');
-INSERT INTO test.buil
-(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
-VALUES('Name3', 'АО', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial3');
-
-
 INSERT INTO test.adress
 (Index_name, City, Street, House, Flat, id)
 VALUES('123111', 'Moscow', 'Ленинская', '10', 1, 1);
@@ -65,6 +40,71 @@ VALUES('123211', 'Moscow', 'Сенная', '2', 15, 2);
 INSERT INTO test.adress
 (Index_name, City, Street, House, Flat, id)
 VALUES('123311', 'Moscow', 'Финская', '37к4', 12, 3);
+
+
+INSERT INTO test.filials
+(Name_Filial, Adress, id, id_for)
+VALUES('Filial', 1, 1, 1);
+INSERT INTO test.filials
+(Name_Filial, Adress, id, id_for)
+VALUES('Filial2', 2, 2, 2);
+INSERT INTO test.filials
+(Name_Filial, Adress, id, id_for)
+VALUES('Filial3', 3, 3, 2);
+
+
+INSERT INTO test.building
+(Name_Company, Form, Adress_Company, Filial_Company, id)
+VALUES('Name1', 'ООО', 2, NULL, 1);
+INSERT INTO test.building
+(Name_Company, Form, Adress_Company, Filial_Company, id)
+VALUES('Name2', 'ИП', 3, 1, 2);
+INSERT INTO test.building
+(Name_Company, Form, Adress_Company, Filial_Company, id)
+VALUES('Name3', 'АО', 3, 2, 3);
+
+
+
+create or replace
+algorithm = UNDEFINED view `buil` as
+select
+    `b`.`Name_Company` as `Name_Company`,
+    `b`.`Form` as `Form`,
+    `a`.`Index_name` as `Index_name`,
+    `a`.`City` as `City`,
+    `a`.`Street` as `Street`,
+    `a`.`House` as `House`,
+    `a`.`Flat` as `Flat`,
+    `f`.`Name_Filial` as `Name_Filial`
+from
+    ((`building` `b`
+join `adress` `a` on
+    ((`b`.`Adress_Company` = `a`.`id`)))
+left join `filials` `f` on
+    ((`b`.`Filial_Company` = `f`.`id_for`)))
+order by
+    `b`.`Name_Company`,
+    `f`.`Name_Filial`;
+
+
+
+-- test.fil source
+
+create or replace
+algorithm = UNDEFINED view `fil` as
+select
+    `f`.`Name_Filial` as `Name_Filial`,
+    `a`.`Index_name` as `Index_name`,
+    `a`.`City` as `City`,
+    `a`.`Street` as `Street`,
+    `a`.`House` as `House`,
+    `a`.`Flat` as `Flat`
+from
+    (`filials` `f`
+join `adress` `a`)
+where
+    (`f`.`Adress` = `a`.`id`);
+
 
 
 
