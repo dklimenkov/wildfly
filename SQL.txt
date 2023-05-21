@@ -31,6 +31,42 @@ create table building(
     FOREIGN KEY (Filial_Company)  REFERENCES filials (id_for));
 
 
+INSERT INTO test.fil
+(Name_Filial, Index_name, City, Street, House, Flat)
+VALUES('Filial', '123111', 'Moscow', 'Ленинская', '10', 1);
+INSERT INTO test.fil
+(Name_Filial, Index_name, City, Street, House, Flat)
+VALUES('Filial2', '123211', 'Moscow', 'Сенная', '2', 15);
+INSERT INTO test.fil
+(Name_Filial, Index_name, City, Street, House, Flat)
+VALUES('Filial3', '123311', 'Moscow', 'Финская', '37к4', 12);
+
+
+INSERT INTO test.buil
+(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
+VALUES('Name1', 'ООО', '123211', 'Moscow', 'Сенная', '2', 15, NULL);
+INSERT INTO test.buil
+(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
+VALUES('Name2', 'ИП', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial');
+INSERT INTO test.buil
+(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
+VALUES('Name3', 'АО', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial2');
+INSERT INTO test.buil
+(Name_Company, Form, Index_name, City, Street, House, Flat, Name_Filial)
+VALUES('Name3', 'АО', '123311', 'Moscow', 'Финская', '37к4', 12, 'Filial3');
+
+
+INSERT INTO test.adress
+(Index_name, City, Street, House, Flat, id)
+VALUES('123111', 'Moscow', 'Ленинская', '10', 1, 1);
+INSERT INTO test.adress
+(Index_name, City, Street, House, Flat, id)
+VALUES('123211', 'Moscow', 'Сенная', '2', 15, 2);
+INSERT INTO test.adress
+(Index_name, City, Street, House, Flat, id)
+VALUES('123311', 'Moscow', 'Финская', '37к4', 12, 3);
+
+
 
 
 
